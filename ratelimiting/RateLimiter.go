@@ -20,7 +20,7 @@ func RateLimiter(durationInMillis int, total int) func(http.HandlerFunc) (http.H
 	requests := make([]Request, 0)
 	return func(cb http.HandlerFunc) (http.HandlerFunc) {
 		return func(w http.ResponseWriter, r *http.Request) {
-			if len(requests) > total {
+			if len(requests) == total {
 				firstRequest := requests[0]
 				t := time.Now()
 				fmt.Println("Difference in time", timeDifference(firstRequest.curr, t))
